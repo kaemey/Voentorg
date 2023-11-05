@@ -4,7 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\RMVC\Route\Route;
 
@@ -26,6 +26,9 @@ Route::post('/admin/product', [AdminController::class, 'product_store']);
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/reg', [HomeController::class, 'reg'])->name('reg');
 Route::get('/profile', [HomeController::class, 'profile']);
+Route::get('/do_order', [OrderController::class, 'do_order']);
+Route::post('/do_order', [OrderController::class, 'process_order']);
+Route::get('/order_success/{order_id}', [OrderController::class, 'order_success']);
 Route::get('/news', [HomeController::class, 'news']);
 
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');

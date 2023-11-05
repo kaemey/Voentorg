@@ -9,6 +9,7 @@ data(){
         cat_id: 0,
         products_count: 1,
         cart_row: 0,
+        parsed_products: new Array(),
         cart_products: new Array()
     }
 },
@@ -42,28 +43,33 @@ methods: {
     },
     add_to_cart(product){
         this.cart_row++
-        setCookie('product'+this.cart_row, {'title': product.product_title, 'id': product.product_id, 'count': this.products_count, 'color': this.selected_color});
+        setCookie('product'+this.cart_row, {'title': product.product_title, 'id': product.product_id, 'count': this.products_count, 'color': this.selected_color}, {path: "/", expires: Date.now() + 7 * 24 * 60 * 60 * 1000});
         this.cart_products.push(JSON.parse(getCookie('product'+this.cart_row)))
         this.products_count = 1
-        setCookie('products_count', this.cart_row, {expires: Date.now() + 7 * 24 * 60 * 60 * 1000});
+        setCookie('ProductsCount', this.cart_row, {path: "/", expires: Date.now() + 7 * 24 * 60 * 60 * 1000});
     },
     update_cart_rows(){
 
-        if (getCookie('products_count')) {
-            this.cart_row = parseInt(getCookie('products_count'))
+        if (getCookie('ProductsCount')) {
+            this.cart_row = parseInt(getCookie('ProductsCount'))
         }
 
     },
     parse_cookie_cart(){
 
-        for (var i = 1; i <= getCookie('products_count'); i++){
-            this.cart_products.push(JSON.parse(getCookie('product'+i)))
+        for (var i = 1; i <= getCookie('ProductsCount'); i++){
+            let product_data = JSON.parse(getCookie('product'+i))
+            this.cart_products.push(product_data)
         }
+
+        this.cart_products.forEach(element => {
+            this.parsed_products.push(element.id + ":" + element.count)
+        });
 
     },
     clear_cart(){
-        setCookie('products_count', 0, {expires: Date.now() + 7 * 24 * 60 * 60 * 1000});
-        for (var i = 1; i <= getCookie('products_count'); i++){
+        setCookie('ProductsCount', 0, {path: "/", expires: Date.now() + 7 * 24 * 60 * 60 * 1000});
+        for (var i = 1; i <= getCookie('ProductsCount'); i++){
             deleteCookie('product'+i)
         }
         this.cart_products = new Array()

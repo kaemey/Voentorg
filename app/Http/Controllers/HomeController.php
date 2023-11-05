@@ -20,15 +20,45 @@ class HomeController extends Controller{
     }
 
     public function profile(){
-
+        //Ищем пользователя
         $conn = DB::$conn;
         $stmt = $conn->prepare("SELECT * FROM users WHERE login = ?");
-        $stmt->bind_param("s", $_SESSION['login']);
-        $stmt->execute();
+        $stmt->execute([$_SESSION['login']]);
         $result = $stmt->get_result();
-        $data = $result->fetch_assoc();
+        $user = $result->fetch_assoc();
 
-        return View::view('home.profile', compact('data'));
+        //Ищем заказы пользователя
+        $orders = array();
+        
+        $stmt = $conn->prepare("SELECT * FROM orders WHERE user_id = ?");
+        $stmt->execute([$user['id']]);
+        $result = $stmt->get_result();
+
+        while($row = $result->fetch_assoc()){
+
+            $products = array();
+
+            $order_id = $row['id'];
+            //Ищем продукты по заказам пользователя
+            $order = explode(",", $row['products']);
+
+            foreach($order as $pos){
+                $pos = explode(':', $pos);
+                $product_id = $pos[0];
+                $count = $pos[1];
+
+                $stmt= $conn->prepare("SELECT * FROM products WHERE product_id=?");
+                $stmt->execute([$product_id]);
+                $subresult = $stmt->get_result();
+                $subrow = $subresult->fetch_assoc();
+
+                $products[] = (object)['obj' => $subrow, 'count' => $count];  
+            }
+
+            $orders[] = (object)['products' => $products, 'id' => $order_id, 'status' => $row['status']];
+        }
+
+        return View::view('home.profile', compact('user', 'orders'));
     }   
 
     public function news(){

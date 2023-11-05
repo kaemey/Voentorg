@@ -193,6 +193,20 @@
 	font-size: 20px;
 }
 
+.do_order {
+	font-size: 20px;
+}
+
+.do_order input{
+	width: 70%;
+	font-size: 20px;
+}
+
+.do_order button{
+	width: 70%;
+	font-size: 20px;
+}
+
 .news_post {
 	cursor: pointer;
 }
@@ -322,4 +336,9 @@
 .cart_order {
 	margin-top: 0.5rem;
 	width: 60%;
+}
+
+.orders_list{
+	margin-bottom: 1rem;
+	border-bottom: 1px dotted;
 }

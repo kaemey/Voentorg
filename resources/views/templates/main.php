@@ -64,7 +64,7 @@ $title="Тестовый сайт";
 				<div v-for="pos in cart_products">
 					{{ pos.title }} : {{ pos.count }} шт.
 				</div>
-				<a href="" class="btn btn-primary cart_order">Заказать</a>
+				<a href="/do_order" class="btn btn-primary cart_order">Заказать</a>
 				<button @click.prevent="clear_cart" class="btn btn-danger cart_order">Очистить</button>
 			</div>
 		</div>
