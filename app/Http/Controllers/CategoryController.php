@@ -20,10 +20,7 @@ class CategoryController extends Controller{
         $stmt= $conn->prepare($sql);
         $stmt->execute([$ctg_id]);
         $result = $stmt->get_result();
-
-        while ($row = $result->fetch_assoc()){
-            $subcategories[] = $row;
-        }
+        $subcategories = $result->fetch_all(MYSQLI_ASSOC);
 
         if (isset($subcategories)) return View::view('category.show_ctg', compact('subcategories', "ctg_id"));
         else return View::view('category.show_ctg', compact("ctg_id"));
@@ -36,19 +33,13 @@ class CategoryController extends Controller{
         $stmt= $conn->prepare($sql);
         $stmt->execute([$ctg_id, $subctg_id]);
         $result = $stmt->get_result();
-
-        while ($row = $result->fetch_assoc()){
-            $products[] = $row;
-        }
+        $products = $result->fetch_all(MYSQLI_ASSOC);
 
         $sql = "SELECT * FROM subcategories JOIN categories ON subcategories.category_id = categories.id WHERE category_id=?";
         $stmt= $conn->prepare($sql);
         $stmt->execute([$ctg_id]);
         $result = $stmt->get_result();
-
-        while ($row = $result->fetch_assoc()){
-            $subcategories[] = $row;
-        }
+        $subcategories = $result->fetch_all(MYSQLI_ASSOC);
 
         if (isset($subcategories)){
 
@@ -71,28 +62,23 @@ class CategoryController extends Controller{
         $stmt= $conn->prepare($sql);
         $stmt->execute([$product_id]);
         $result = $stmt->get_result();
-
-        while ($row = $result->fetch_assoc()){
-            $products[] = $row;
-        }
-
+        $product = $result->fetch_assoc();
+   
         $sql = "SELECT * FROM subcategories JOIN categories ON subcategories.category_id = categories.id WHERE category_id=?";
         $stmt= $conn->prepare($sql);
         $stmt->execute([$ctg_id]);
         $result = $stmt->get_result();
 
-        while ($row = $result->fetch_assoc()){
-            $subcategories[] = $row;
-        }
+        $subcategories = $result->fetch_all(MYSQLI_ASSOC);
 
         if (isset($subcategories)){
 
-            return View::view('category.show_product', compact('products','subcategories', 'ctg_id')); 
+            return View::view('category.show_product', compact('product','subcategories', 'ctg_id')); 
 
         }
         else {
 
-            return View::view('category.show_product', compact('products', 'ctg_id'));
+            return View::view('category.show_product', compact('product', 'ctg_id'));
 
         }
 

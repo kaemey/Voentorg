@@ -18,17 +18,17 @@
 						
 						<div class="container-fluid">
 							<div class='row'>";
-								<?php
-								for ($i = 0; $i < count($categories); $i++){
-									if($i % 3 == 0) echo "</div><div class='row'>";
-									echo "
+
+								<?php for ($i = 0; $i < count($categories); $i++){ ?>
+									<?php if ($i % 3 == 0) { ?>
+										</div><div class='row'>
+									<?php } ?>
 									<div class='col-xl-4 col-md-6 col-sm-12 catalog_item'>
-										<a href='".$url.'category/'.$categories[$i]['id']."'><img src='".$url.$categories[$i]['category_image']."' alt='catalog_chapter'></a>
-										<p>".$categories[$i]['category_title']."</p>
+										<a href='<?=$url?>category/<?=$categories[$i]['id']?>'><img src='<?=$url.$categories[$i]['category_image']?>' alt='catalog_chapter'></a>
+										<p><?=$categories[$i]['category_title']?></p>
 									</div>
-									";
-								}
-								?>
+								<?php } ?>
+								
 							</div>
 						</div>
 						
@@ -44,7 +44,7 @@
 										<a href="youtube.com"><img src="images/youtube.png" alt="youtube" height="64"></a>
 									</div>
 									<div class="col-xl-6">
-										<a href="youtube.com"><img src="images/vk.png" alt="VK" height="64"></a>
+									<a href="youtube.com"><img src="images/vk.png" alt="VK" height="64"></a>
 									</div>
 								</div>
 								

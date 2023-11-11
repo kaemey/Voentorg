@@ -18,27 +18,17 @@
 
 						<h3 style="border-bottom: 2px solid; padding-bottom: 5%;">Предыдущие заказы:</h3>
 
-						<?php
-						
-						foreach($orders as $order){
-
-							if($order->status == "Вручен" or $order->status == "Не вручен"){
-								echo "
-									<div class='order'>
-										<h5 style='color: green'>Заказ №".$order->id.":</h4>";
-
-								foreach($order->products as $product){
-									echo '<h6>Товар: '.$product->obj['product_title'].', количество: '.$product->count."</h6>";
-								}
-
-								echo "	<h6 style='color: orange'>Статус заказа: ".$order->status.".</h6>
-									</div>
-									";
-							}
-							
-						}
-
-						?>
+						<?php foreach($orders as $order){ ?>
+							<?php if($order->status == "Вручен" or $order->status == "Не вручен"){ ?>
+								<div class='order'>
+									<h5 style='color: green'>Заказ №<?=$order->id?>:</h5>
+									<?php foreach($order->products as $product){ ?>
+										<h6>Товар: <?=$product->obj['product_title']?>, количество: <?=$product->count?></h6>
+									<?php } ?>
+									<h6 style='color: orange'>Статус заказа: <?=$order->status?>.</h6>
+								</div>
+							<?php } ?>
+						<?php } ?>
 
 					</div>
 
@@ -47,27 +37,17 @@
 						<h2 class="text-center" style="border-bottom: 2px solid; padding-bottom: 5%;">Текущие заказы:
 						</h2>
 
-						<?php
-						
-						foreach($orders as $order){
-
-							if($order->status !== "Вручен" and $order->status !== "Не вручен"){
-								echo "
-									<div class='order'>
-										<h4 style='color: green'>Заказ №".$order->id.":</h4>";
-
-								foreach($order->products as $product){
-									echo '<h5>Товар: '.$product->obj['product_title'].', количество: '.$product->count."</h5>";
-								}
-
-								echo "	<h5 style='color: orange'>Статус заказа: ".$order->status.".</h5>
-									</div>
-									";
-							}
-							
-						}
-
-						?>
+						<?php foreach($orders as $order){ ?>
+							<?php if($order->status !== "Вручен" and $order->status !== "Не вручен"){ ?>
+								<div class='order'>
+									<h4 style='color: green'>Заказ №<?=$order->id?>:</h4>
+									<?php foreach($order->products as $product){ ?>
+										<h5>Товар: <?=$product->obj['product_title']?>, количество: <?=$product->count?></h5>
+									<?php } ?>
+									<h5 style='color: orange'>Статус заказа: <?=$order->status?>.</h5>
+								</div>
+							<?php } ?>
+						<?php } ?>
 
 					</div>
 

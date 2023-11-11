@@ -18,23 +18,19 @@
 						
 							<div class="container-fluid">
 
-								<?php
-									if (isset($subcategories)){
-										echo "<div class='row'>";
-										for ($i = 0; $i < count($subcategories); $i++){
-											if($i % 3 == 0) echo "</div><div class='row'>";
-											echo '
-											<div class="col-md-4 catalog_chapter">
-												<a href="/subcategory/'.$subcategories[$i]['category_id'].'/'.$subcategories[$i]['subcategory_id'].'">
-													<img src="'.$url.$subcategories[$i]['subcategory_image'].'" alt="catalog_chapter">
-													<p>'.$subcategories[$i]['subcategory_title'].'</p>
-												</a>
-											</div>
-											';
-										}
-										echo "</div>";
-									}
-								?>
+								<?php if (isset($subcategories)){ ?>
+									<div class='row'>
+										<?php for ($i = 0; $i < count($subcategories); $i++) { ?>
+											<?php if($i % 3 == 0) echo "</div><div class='row'>"; ?>
+												<div class="col-md-4 catalog_chapter">
+													<a href="/subcategory/<?=$subcategories[$i]['category_id']?>/<?=$subcategories[$i]['subcategory_id']?>">
+														<img src="<?=$url.$subcategories[$i]['subcategory_image']?>" alt="catalog_chapter">
+														<p><?=$subcategories[$i]['subcategory_title']?></p>
+													</a>
+												</div>
+										<?php } ?>
+									</div>
+								<?php } ?>
 								
 							</div>
 							
@@ -65,40 +61,27 @@
 
 								<div class="row categories_right" style="margin-top: 4%;">
 									<ul>
-										
-											<?php
-												foreach ($categories as $category){
-
-													if($ctg_id == $category['id']){
-														echo '
-														<li>
-															<a href="/category/'.$category['id'].'/" style="color: blue; font-size: 20px; text-decoration: none; font-weight: bold;">'.$category['category_title'].'</a>
-														</li>
-														';		
-
-														if(isset($subcategories)){
-															echo '<ul style="margin-top: 3%;">';
-															foreach($subcategories as $subcat){
-																echo '
-																	<li>
-																		<a href="/subcategory/'.$category['id'].'/'.$subcat['subcategory_id'].'">'.$subcat['subcategory_title'].'</a>
-																	</li>												
-																';
-															}
-															echo '</ul>';
-														}	
-																								
-													}
-													else{
-														echo '
-														<li>
-															<a href="/category/'.$category['id'].'/">'.$category['category_title'].'</a>
-														</li>
-														';
-													}
-		
-												}
-											?>
+											
+											<?php foreach ($categories as $category){ ?>
+												<?php if($ctg_id == $category['id']){ ?>
+													<li>
+														<a href="/category/<?=$category['id']?>/" style="color: blue; font-size: 20px; text-decoration: none; font-weight: bold;"><?=$category['category_title']?></a>
+													</li>			
+													<?php if($ctg_id == $category['id']){ ?>	
+														<ul style="margin-top: 3%;">
+															<?php foreach ($subcategories as $subcat){ ?>
+																<li>
+																	<a href="/subcategory/<?=$category['id']?>/<?=$subcat['subcategory_id']?>"><?=$subcat['subcategory_title']?></a>
+																</li>	
+															<?php } ?>	
+														</ul>
+													<?php } ?>									
+												<?php } else { ?>
+													<li>
+														<a href="/category/<?=$category['id']?>/"><?=$category['category_title']?></a>
+													</li>
+												<?php } ?>	
+											<?php } ?>
 
 									</ul>
 								</div>

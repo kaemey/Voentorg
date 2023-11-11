@@ -28,11 +28,11 @@
                                 Категория<br>
                                 <select name="category_id" @change="updateSubctgs(cat_id)" v-model="cat_id">
                                     <option value='0' disabled>Выбери категорию</option>
-                                    <?php
-                                        foreach($categories as $category){
-                                            echo "<option value='".$category['id']."'>".$category['category_title']."</option>";
-                                        }
-                                    ?>
+
+                                    <?php foreach($categories as $category){ ?>
+                                            <option value='<?=$category['id']?>'><?=$category['category_title']?></option>
+                                    <?php } ?>
+                                    
                                 </select><br><br>
                                 Податегория<br>
                                 <select name="subcategory_id">

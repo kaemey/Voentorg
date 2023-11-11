@@ -1,3 +1,16 @@
+<?php
+	use App\RMVC\Route\Route;
+	if (!isset($product)) Route::redirect('/home');
+	$image = $product['product_image'];
+	$title = $product['product_title'];
+	$description = $product['description'];
+	$colors = null;
+	
+	if($product['colors']){
+		$colors = explode(",", $product['colors']);
+	}
+?>
+
 <div class="container">
 
 	<div class="row">
@@ -17,52 +30,28 @@
 						<div class="col-md-9">
 						
 							<div class="container-fluid">
+								<div class='row product mt-1'>
+									<div class='col-md-12 col-sm-12 col-xl-3 text-center'>
+										<img src='<?=$url.$image?>'>
+									</div>
+									<div class='col-md-12 col-sm-12 col-xl-9 text-center'>
+										<p><?=$title?></p>
+										<?php if($colors){ ?>
+											<?php for ($i = 1; $i <= count($colors); $i++) {?>
+												<div @click='selectColor(<?=$i?>)' id='selectColor<?=$i?>' class='selectColor' style='background-color: #<?=$colors[$i]?>'></div>
+											<?php } ?>
+										<?php } ?>
+										<div class='products_count'>
+											<button @click='subtract_products_count'>-</button><input type='text' :value='products_count'><button  @click='add_products_count'>+</button><br><br>
+										</div>
+										<button @click='add_to_cart(<?=json_encode($product)?>)' class='btn btn-primary'>Добавить в корзину</button>
+													
+									</div>
 								
-									<?php
-										if (isset($products)){
-											$product = $products[0];
-											
-											$image = $product['product_image'];
-											$title = $product['product_title'];
-											$description = $product['description'];
-											
-											if(isset($product['colors'])){
-												$colors = explode(",", $product['colors']);
-												
-											}
-
-											echo "
-												<div class='row product mt-1'>
-													<div class='col-md-12 col-sm-12 col-xl-3 text-center'>
-														<img src='$url$image'>
-													</div>
-													<div class='col-md-12 col-sm-12 col-xl-9 text-center'>
-														<p>$title</p>";
-											if (isset($colors)){		
-												$i = 0;
-												
-												foreach($colors as $color){
-													$i++;
-													echo "
-														<div @click='selectColor($i)' id='selectColor$i' class='selectColor' style='background-color: #$color'></div>
-													";
-												}
-												
-											}
-											echo "
-														<div class='products_count'>
-															<button @click='subtract_products_count'>-</button><input type='text' :value='products_count'><button  @click='add_products_count'>+</button><br><br>
-														</div>
-														<button @click='add_to_cart(".json_encode($product).")' class='btn btn-primary'>Добавить в корзину</button>
-													</div>
-												</div>
-												<div class='row mt-5'>
-													<h4>$description</h4>
-												</div>
-											";
-										}
-									?>																		
-								
+									<div class='row mt-5'>
+										<h4><?=$description?></h4>
+									</div>	
+								</div>																
 							</div>
 							
 						</div>
@@ -93,39 +82,26 @@
 								<div class="row categories_right" style="margin-top: 4%;">
 									<ul>
 										
-											<?php
-												foreach ($categories as $category){
-
-													if($ctg_id == $category['id']){
-														echo '
+									<?php foreach ($categories as $category){ ?>
+										<?php if($ctg_id == $category['id']){ ?>
+											<li>
+												<a href="/category/<?=$category['id']?>/" style="color: blue; font-size: 20px; text-decoration: none; font-weight: bold;"><?=$category['category_title']?></a>
+											</li>			
+											<?php if($ctg_id == $category['id']){ ?>	
+												<ul style="margin-top: 3%;">
+													<?php foreach ($subcategories as $subcat){ ?>
 														<li>
-															<a href="/category/'.$category['id'].'/" style="color: blue; font-size: 20px; text-decoration: none; font-weight: bold;">'.$category['category_title'].'</a>
-														</li>
-														';		
-
-														if(isset($subcategories)){
-															echo '<ul style="margin-top: 3%;">';
-															foreach($subcategories as $subcat){
-																echo '
-																	<li>
-																		<a href="/category/'.$category['id'].'/'.$subcat['subcategory_id'].'">'.$subcat['subcategory_title'].'</a>
-																	</li>												
-																';
-															}
-															echo '</ul>';
-														}	
-																								
-													}
-													else{
-														echo '
-														<li>
-															<a href="/category/'.$category['id'].'/">'.$category['category_title'].'</a>
-														</li>
-														';
-													}
-		
-												}
-											?>
+															<a href="/subcategory/<?=$category['id']?>/<?=$subcat['subcategory_id']?>"><?=$subcat['subcategory_title']?></a>
+														</li>	
+													<?php } ?>	
+												</ul>
+											<?php } ?>									
+										<?php } else { ?>
+											<li>
+												<a href="/category/<?=$category['id']?>/"><?=$category['category_title']?></a>
+											</li>
+										<?php } ?>	
+									<?php } ?>
 
 									</ul>
 								</div>

@@ -26,16 +26,15 @@ $title="Тестовый сайт";
 		
 		<div class="col-xl-3 col-md-6 col-sm-11">
 			<ul class="login">
-				<?php
-					if(!isset($_SESSION['login']))echo '
+
+				<?php if(!isset($_SESSION['login'])) { ?>
 					<li><a href="/login">Войти</a></li>
 					<li><a href="/reg">Регистрация</a>
-					';
-					else echo '
+				<?php } else { ?>
 					<li><a href="/profile">Профиль</a></li>
 					<li><a href="logout">Выйти</a></li>
-					';
-				?>
+				<?php }?>
+
 			</ul>
 		</div>
 		
@@ -87,11 +86,11 @@ $title="Тестовый сайт";
 
 					<div v-show="display_catalog" @mouseleave="display_catalog = false" style="display: none;">			
 						<ul class="catalog_header">
-							<?php
-								foreach($categories as $category){
-									echo "<a href='$url".'category/'.$category['id']."'>".$category['category_title']."</a><br>";
-								}
-							?>
+							
+							<?php foreach($categories as $category){ ?>
+								<a href='<?=$url?>category/<?=$category['id']?>'><?=$category['category_title']?></a><br>
+							<?php } ?>
+						
 						</ul>
 					</div>
 

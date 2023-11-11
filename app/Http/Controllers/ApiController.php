@@ -12,10 +12,7 @@ class ApiController extends Controller{
         $stmt= $conn->prepare($sql);
         $stmt->execute([$ctg_id]);
         $result = $stmt->get_result();
-
-        while ($row = $result->fetch_assoc()){
-            $subcategories[] = $row;
-        }
+        $subcategories = $result->fetch_all(MYSQLI_ASSOC);
 
         return json_encode($subcategories);
     }

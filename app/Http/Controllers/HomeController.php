@@ -62,15 +62,7 @@ class HomeController extends Controller{
     }   
 
     public function news(){
-
-        $conn = DB::$conn;
-        $stmt = $conn->prepare("SELECT * FROM news");
-        $stmt->bind_param("s", $_SESSION['login']);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $data = $result->fetch_assoc();
-
-        return View::view('home.news', compact('data'));
+        
     }   
     
 
