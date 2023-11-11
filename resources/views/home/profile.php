@@ -1,4 +1,5 @@
-<div class="container">
+
+<div class="container" id="profile">
 
 	<div class="row">
 
@@ -55,18 +56,18 @@
 						<h4 class="text-center">Редактировать профиль</h4><br>
 						<form class="reg_form text-center">
 							Имя<br>
-							<input type="text" name="firstname" disabled value="<?= $user['first_name'] ?>"><br>
+							<input type="text" name="firstname" :disabled="profile_disabled_inputs" value="<?= $user['first_name'] ?>"><br>
 							Фамилия<br>
-							<input type="text" name="secondname" disabled value="<?= $user['second_name'] ?>"><br>
+							<input type="text" name="secondname" :disabled="profile_disabled_inputs" value="<?= $user['second_name'] ?>"><br>
 							Город<br>
-							<input type="text" name="city" style="width: 100%;" disabled value="<?= $user['city'] ?>"><br>
+							<input type="text" name="city" style="width: 100%;" :disabled="profile_disabled_inputs" value="<?= $user['city'] ?>"><br>
 							Адрес<br>
-							<input type="text" name="city" style="width: 100%;" disabled
+							<input type="text" name="adress" style="width: 100%;" :disabled="profile_disabled_inputs"
 								value="<?= $user['address'] ?>"><br>
 							Email<br>
-							<input type="text" name="email" style="width: 80%;" disabled
+							<input type="text" name="email" style="width: 80%;" :disabled="profile_disabled_inputs"
 								value="<?= $user['email'] ?>"><br><br>
-							<input type="submit" class="btn btn-primary" value="Редактировать"><br><br>
+							<button class="btn btn-primary" @click.prevent="changeInputs">{{profile_button_value}}</button><br><br>
 							Новый пароль<br>
 							<input type="password" name="password"><br>
 							Подтверждение пароля<br>

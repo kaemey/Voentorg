@@ -1,4 +1,4 @@
-const template = {
+const main = {
 
 data(){
     return {
@@ -10,7 +10,9 @@ data(){
         products_count: 1,
         cart_row: 0,
         parsed_products: new Array(),
-        cart_products: new Array()
+        cart_products: new Array(),
+        profile_disabled_inputs: true,
+        profile_button_value: 'Редактировать'
     }
 },
 mounted() {
@@ -74,12 +76,21 @@ methods: {
         }
         this.cart_products = new Array()
         this.cart_row = 0
-    }
+    },
+    changeInputs(){
+		this.profile_disabled_inputs = !this.profile_disabled_inputs
+		if (this.profile_disabled_inputs){
+			this.profile_button_value = 'Редактировать'
+		}
+		else{
+			this.profile_button_value = 'Сохранить'
+		}
+	},
 }
 
 }
 
-const app = Vue.createApp(template)
+const app = Vue.createApp(main)
 
 app.mount('#app')
 
@@ -102,3 +113,4 @@ function DeleteAllCookie() {
 		document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	}
 }
+
