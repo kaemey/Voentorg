@@ -27,16 +27,19 @@
 								<li><a href="#" class="vk_icon"></a></li>
 								<li><a href="#" class="yandex_icon"></a></li>
 							</ul>				 -->
-							
+							<?php if(isset($_SESSION['loginError'])) {?>
+								<div class="error_message">
+									<?=$_SESSION['loginError']?>
+								</div>	
+							<?php } ?>
 							<form class="auth_form" action="/user/login" method="POST">
 								Логин<br>
-								<input type="text" name="login" value="123456789"><br>
+								<input type="text" name="login" value="kaemey"><br>
 								Пароль<br>
-								<input type="password" name="password" value="123456789"><br>
+								<input type="password" name="password" value="1234567890"><br>
 								<input type="checkbox" name="remember_auth" style="width: 32px; transform:scale(2.0); margin: 3%;">Запомнить меня
 								<input type="submit" class="btn btn-primary" value="Войти"><br><br>
 							</form>
-							<?php if(isset($_SESSION['loginError']))  echo $_SESSION['loginError']; ?>
 							<a href="/reg" class="btn btn-warning" style="font-size: 20px; width: 70%;">Регистрация</a><br><br>
 							<a href="#" style="font-size: 24px; color: black;">Забыли пароль?</a><br><br>
 							

@@ -29,6 +29,8 @@
 								<input type="text" name="login"><br>
 								* Email<br>
 								<input type="text" name="email"><br>
+								* Телефон<br>
+								<input type="text" name="phone"><br>
 								* Пароль<br>
 								<input type="password" name="password"><br>
 								* Подтвердите пароль<br>

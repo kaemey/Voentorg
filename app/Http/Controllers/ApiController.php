@@ -11,8 +11,7 @@ class ApiController extends Controller{
         $sql = "SELECT * FROM subcategories WHERE category_id=?";
         $stmt= $conn->prepare($sql);
         $stmt->execute([$ctg_id]);
-        $result = $stmt->get_result();
-        $subcategories = $result->fetch_all(MYSQLI_ASSOC);
+        $subcategories = $stmt->fetchAll();
 
         return json_encode($subcategories);
     }

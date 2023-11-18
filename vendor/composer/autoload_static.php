@@ -7,28 +7,17 @@ namespace Composer\Autoload;
 class ComposerStaticInit08b1ac17918c7df16451fb7f7cf3c700
 {
     public static $files = array (
-        '72142d7b40a3a0b14e91825290b5ad82' => __DIR__ . '/..' . '/cakephp/core/functions.php',
-        '948ad5488880985ff1c06721a4e447fe' => __DIR__ . '/..' . '/cakephp/utility/bootstrap.php',
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+        '0e423a14e27410a071e5d815d3ffc856' => __DIR__ . '/..' . '/larapack/dd/src/helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'P' => 
+        'S' => 
         array (
-            'Psr\\SimpleCache\\' => 16,
-            'Psr\\Log\\' => 8,
-            'Psr\\Container\\' => 14,
-        ),
-        'L' => 
-        array (
-            'League\\Container\\' => 17,
-        ),
-        'C' => 
-        array (
-            'Cake\\Utility\\' => 13,
-            'Cake\\Datasource\\' => 16,
-            'Cake\\Database\\' => 14,
-            'Cake\\Core\\' => 10,
-            'Cake\\Chronos\\' => 13,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\VarDumper\\' => 28,
         ),
         'A' => 
         array (
@@ -37,41 +26,13 @@ class ComposerStaticInit08b1ac17918c7df16451fb7f7cf3c700
     );
 
     public static $prefixDirsPsr4 = array (
-        'Psr\\SimpleCache\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Psr\\Log\\' => 
+        'Symfony\\Component\\VarDumper\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/log/src',
-        ),
-        'Psr\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/container/src',
-        ),
-        'League\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/league/container/src',
-        ),
-        'Cake\\Utility\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/cakephp/utility',
-        ),
-        'Cake\\Datasource\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/cakephp/datasource',
-        ),
-        'Cake\\Database\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/cakephp/database',
-        ),
-        'Cake\\Core\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/cakephp/core',
-        ),
-        'Cake\\Chronos\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/cakephp/chronos/src',
+            0 => __DIR__ . '/..' . '/symfony/var-dumper',
         ),
         'App\\' => 
         array (
