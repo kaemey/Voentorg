@@ -12,7 +12,6 @@ data(){
         parsed_products: new Array(),
         cart_products: new Array(),
         profile_disabled_inputs: true,
-        profile_button_value: 'Редактировать'
     }
 },
 mounted() {
@@ -81,11 +80,15 @@ methods: {
 		this.profile_disabled_inputs = !this.profile_disabled_inputs
 		if (this.profile_disabled_inputs){
 			this.profile_button_value = 'Редактировать'
+            this.updateProfile()
 		}
 		else{
 			this.profile_button_value = 'Сохранить'
 		}
 	},
+    updateProfile(){
+
+    }
 }
 
 }

@@ -10,4 +10,3 @@ require "../routes/web.php";
 
 DB::start();
 App::run();
-DB::$conn->close();

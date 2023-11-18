@@ -25,14 +25,14 @@
 					
 						<div class="col-md-4" style="height: 700px;">
 							
-                            <form action="/admin/category" method="POST">
+                            <form action="/admin/category/edit" method="POST">
                                 Title<br>
-                                <input type="text" name="title"><br>
+                                <input type="text" name="title" value="<?=$category['title']?>"><br>
                                 Image<br>
-                                <input type="text" name="image"><br><br>
+                                <input type="text" name="image" value="<?=$category['image']?>"><br><br>
                                 <input type="submit" class="btn btn-primary" value="Создать">
                             </form><br>
-                            <a href="/admin/product" class="btn btn-warning">Создать продукт</a><br><br>
+                            <a href="/admin/product" class="btn btn-warning">Редактировать категорию</a><br><br>
 							
 						</div>
 						

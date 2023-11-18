@@ -342,3 +342,18 @@
 	margin-bottom: 1rem;
 	border-bottom: 1px dotted;
 }
+
+.error_message{
+	background-color: red;
+	text-align: center;
+	color: white;
+	font-size: 1rem;
+}
+
+.func_buttons a{
+	margin: 0.5rem;
+}
+
+.func_buttons h4{
+	margin-top: 0.5rem;
+}

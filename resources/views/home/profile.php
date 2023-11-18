@@ -1,4 +1,8 @@
+<?php
+	use App\RMVC\Route\Route;
 
+    if (!isset($_SESSION['login']))  Route::redirect('/home');
+?>
 <div class="container" id="profile">
 
 	<div class="row">
@@ -54,7 +58,7 @@
 
 					<div class="col-md-3" style="height: 700px;">
 						<h4 class="text-center">Редактировать профиль</h4><br>
-						<form class="reg_form text-center">
+						<form class="reg_form text-center" method="post" action="/profile">
 							Имя<br>
 							<input type="text" name="firstname" :disabled="profile_disabled_inputs" value="<?= $user['first_name'] ?>"><br>
 							Фамилия<br>
@@ -62,13 +66,16 @@
 							Город<br>
 							<input type="text" name="city" style="width: 100%;" :disabled="profile_disabled_inputs" value="<?= $user['city'] ?>"><br>
 							Адрес<br>
-							<input type="text" name="adress" style="width: 100%;" :disabled="profile_disabled_inputs"
-								value="<?= $user['address'] ?>"><br>
+							<input type="text" name="adress" v-model="profile_adress" style="width: 100%;" :disabled="profile_disabled_inputs"
+								value="<?= $user['adress'] ?>"><br>
 							Email<br>
-							<input type="text" name="email" style="width: 80%;" :disabled="profile_disabled_inputs"
+							<input type="text" name="email"  style="width: 80%;" :disabled="profile_disabled_inputs"
 								value="<?= $user['email'] ?>"><br><br>
-							<button class="btn btn-primary" @click.prevent="changeInputs">{{profile_button_value}}</button><br><br>
-							Новый пароль<br>
+							<button class="btn btn-primary" v-show="profile_disabled_inputs" @click.prevent="changeInputs">Редактировать</button>
+							<button class="btn btn-primary" v-show="!profile_disabled_inputs">Сохранить</button><br>
+						</form>
+						<form class="reg_form text-center" method="post" action="/profile/password">
+							<br><h3>Новый пароль</h3>
 							<input type="password" name="password"><br>
 							Подтверждение пароля<br>
 							<input type="password" name="repassword"><br><br>

@@ -2,6 +2,7 @@
 
 namespace App\RMVC\View;
 use App\RMVC\DB\DB;
+use PDO;
 
 class View{
     private static string $path;
@@ -27,7 +28,7 @@ class View{
         $conn = DB::$conn;
         $result = $conn->query("SELECT * FROM categories");
         $categories = array();
-        while($row = $result->fetch_assoc()){
+        while($row = $result->fetch(PDO::FETCH_ASSOC)){
             $categories[] = $row;
         }
 

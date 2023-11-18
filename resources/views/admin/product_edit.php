@@ -26,13 +26,13 @@
 							
                             <form action="/product" method="POST" id="product_create">
                                 Заголовок<br>
-                                <input type="text" name="title"><br>
+                                <input type="text" name="title" value="<?=$product['title']?>"><br>
                                 Цена<br>
-                                <input type="text" name="price"><br>
+                                <input type="text" name="price" value="<?=$product['price']?>"><br>
                                 Путь к изображению<br>
-                                <input type="text" name="image"><br>
+                                <input type="text" name="image" value="<?=$product['image']?>"><br>
                                 Описание<br>
-                                <textarea name="description" style="width: 100%; height: 10rem"></textarea><br>
+                                <textarea name="description" style="width: 100%; height: 10rem"> value="<?=$product['description']?>"</textarea><br>
                                 Категория<br>
                                 <select name="category_id" @change="updateSubctgs(cat_id)" v-model="cat_id">
                                     <option value='0' disabled>Выбери категорию</option>
@@ -47,8 +47,8 @@
                                     <option v-for="subcategory in subcategories" :value='subcategory.subcategory_id'>{{subcategory.subcategory_title}}</option>
                                 </select><br><br>
                                 Цвета<br>
-                                <input type="text" name="colors" value="000000"><br><br>
-                                <input type="submit" class="btn btn-primary" value="Создать">
+                                <input type="text" name="colors" value="<?=$product['color']?>"><br><br>
+                                <input type="submit" class="btn btn-primary" value="Редактировать">
                             </form><br>
                             <a href="/admin/category/" class="btn btn-warning">Создать категорию</a><br><br>
 							

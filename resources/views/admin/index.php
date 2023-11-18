@@ -1,48 +1,96 @@
+<?php
+use App\RMVC\Route\Route;
+use App\Http\Controllers\UserController;
+
+if (!isset($_SESSION['login']))
+	Route::redirect('/home');
+
+UserController::checkAdmin();
+
+?>
+
 <div class="container">
 
 	<div class="row">
-		
-		<div class="col-md-12" style="background-color: #f0f0f0">
-			
-				<div class="container-fluid">
-				
-					<div class="row">
-						<div class="col-md-12 line_full">
-							ADMIN PANEL
-						</div>
-					</div>
-					
-					<div class="row text-center" style="margin-top: 10%;">
-					
-						<div class="col-md-4">
-							
-							<a href="#" class="btn btn-primary" style="transform:scale(1.5);">Добавить пользователя</a><br><br><br>
-							<a href="#" class="btn btn-warning" style="transform:scale(1.5);">Редактировать пользователя</a><br><br><br>
-							<a href="#" class="btn btn-danger" style="transform:scale(1.5);">Сбросить пароль пользователю</a><br><br><br>
-							
-						</div>
-						
-						<div class="col-md-4">
-						
-							<a href="/admin/product" class="btn btn-primary" style="transform:scale(1.5);">Добавить товар</a><br><br><br>
-							<a href="/admin/product/{product_id}" class="btn btn-warning" style="transform:scale(1.5);">Редактировать товар</a><br><br><br>
-							<a href="admin/product/delete/" class="btn btn-danger" style="transform:scale(1.5);">Удалить товар</a><br><br><br>
-						
-						</div>	
-						
-						<div class="col-md-4" style="height: 700px;">		
 
-							<a href="admin/category/" class="btn btn-primary" style="transform:scale(1.5);">Добавить категорию</a><br><br><br>
-							<a href="admin/category/{ctg_id}" class="btn btn-warning" style="transform:scale(1.5);">Редактировать категорию</a><br><br><br>
-							<a href="admin/category/delete/" class="btn btn-danger" style="transform:scale(1.5);">Удалить категорию</a><br><br><br>
-							
-						</div>
-						
+		<div class="col-md-12">
+
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-md-12 line_full">
+						ADMIN PANEL
 					</div>
-					
 				</div>
-			
+
+				<div class="row">
+
+					<div class="col-md-2" style="border-right: 2px solid;">
+
+						<h3 style="border-bottom: 2px solid; padding-bottom: 5%;">Предыдущие заказы:</h3>
+
+					</div>
+
+					<div class="col-md-7" style="border-right: 2px solid;">
+
+						<h2 class="text-center" style="border-bottom: 2px solid; padding-bottom: 5%;">Новые заказы:
+						</h2>
+
+						<?php foreach ($orders as $order) { ?>
+							<div class='order'>
+								<h4 style='color: green'>Заказ №
+									<?= $order->id ?>:
+								</h4>
+								<?php foreach ($order->products as $product) { ?>
+									<h5>Товар: <?= $product->content['product_title'] ?>, количество: <?= $product->count ?></h5>
+								<?php } ?>
+								<h4>Пользователь:</h4> 
+								<h5>ФИО: <?php echo $order->user->second_name .' '.$order->user->first_name?>, телефон: <?= $order->user->phone ?></h5>
+
+								<?php if (isset($order->user->city)) { ?>
+									<h5>город: <?= $order->user->city ?></h5>
+								<?php } ?>
+
+								<?php if (isset($order->user->address)) { ?>
+									<h5>город: <?= $order->user->adress ?></h5>
+								<?php } ?>
+
+								<p><a href="/admin/order/<?=$order->id?>" class="btn btn-primary">Редактировать</a></p>
+							</div>
+						<?php } ?>
+
+					</div>
+
+					<div class="col-md-3 text-center func_buttons" style="height: 700px;">
+						<h4 class="text-center">Пользователи</h4>
+						<div>
+
+							<a href="/admin/user/add" class="btn btn-primary">Добавить пользователя</a><br>
+							<a href="/admin/user/edit/" class="btn btn-warning">Редактировать пользователя</a><br>
+							<a href="/admin/user/repass/" class="btn btn-danger">Сбросить пароль пользователю</a><br>
+
+						</div>
+						<h4 class="text-center">Товары</h4>
+						<div>
+
+							<a href="/admin/product/" class="btn btn-primary">Добавить товар</a><br>
+							<a href="/admin/product/edit/" class="btn btn-warning">Редактировать товар</a><br>
+
+						</div>
+						<h4 class="text-center">Категории</h4>
+						<div>
+
+							<a href="/admin/category/" class="btn btn-primary">Добавить категорию</a><br>
+							<a href="/admin/category/edit/" class="btn btn-warning">Редактировать категорию</a><br>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
 		</div>
-		
+
 	</div>
 </div>

@@ -19,8 +19,7 @@ class CategoryController extends Controller{
         $sql = "SELECT * FROM subcategories JOIN categories ON subcategories.category_id = categories.id WHERE category_id=?";
         $stmt= $conn->prepare($sql);
         $stmt->execute([$ctg_id]);
-        $result = $stmt->get_result();
-        $subcategories = $result->fetch_all(MYSQLI_ASSOC);
+        $subcategories = $stmt->fetchAll();
 
         if (isset($subcategories)) return View::view('category.show_ctg', compact('subcategories', "ctg_id"));
         else return View::view('category.show_ctg', compact("ctg_id"));
@@ -32,14 +31,12 @@ class CategoryController extends Controller{
         $sql = "SELECT * FROM products JOIN categories ON products.category_id = categories.id WHERE category_id=? AND subcategory_id=?";
         $stmt= $conn->prepare($sql);
         $stmt->execute([$ctg_id, $subctg_id]);
-        $result = $stmt->get_result();
-        $products = $result->fetch_all(MYSQLI_ASSOC);
+        $products = $stmt->fetchAll();
 
         $sql = "SELECT * FROM subcategories JOIN categories ON subcategories.category_id = categories.id WHERE category_id=?";
         $stmt= $conn->prepare($sql);
         $stmt->execute([$ctg_id]);
-        $result = $stmt->get_result();
-        $subcategories = $result->fetch_all(MYSQLI_ASSOC);
+        $subcategories = $stmt->fetchAll();
 
         if (isset($subcategories)){
 
@@ -61,15 +58,13 @@ class CategoryController extends Controller{
         $sql = "SELECT * FROM products JOIN categories ON products.category_id = categories.id WHERE product_id=?";
         $stmt= $conn->prepare($sql);
         $stmt->execute([$product_id]);
-        $result = $stmt->get_result();
-        $product = $result->fetch_assoc();
+        $product = $stmt->fetch();
    
         $sql = "SELECT * FROM subcategories JOIN categories ON subcategories.category_id = categories.id WHERE category_id=?";
         $stmt= $conn->prepare($sql);
         $stmt->execute([$ctg_id]);
-        $result = $stmt->get_result();
 
-        $subcategories = $result->fetch_all(MYSQLI_ASSOC);
+        $subcategories = $stmt->fetchAll();
 
         if (isset($subcategories)){
 
