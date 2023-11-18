@@ -37,7 +37,7 @@ class DB {
         //Объединяем в SQL запрос
         $sql = "INSERT INTO ".$table." ($colums) VALUES ($binds)";
         
-        $stmt = $this->connection->prepare($sql);
+        $stmt = self::$conn->prepare($sql);
 
         try {
             $stmt->execute($data);
