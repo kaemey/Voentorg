@@ -27,7 +27,7 @@ class DB {
 
     }
 
-    public function insert(string $table, array $data): bool{
+    public static function insert(string $table, array $data): bool{
         //Разбиваем на ключи data
         $fields = array_keys($data);
         //Делаем колонки

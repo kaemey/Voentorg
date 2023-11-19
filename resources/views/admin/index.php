@@ -66,22 +66,29 @@ UserController::checkAdmin();
 						<div>
 
 							<a href="/admin/user/add" class="btn btn-primary">Добавить пользователя</a><br>
-							<a href="/admin/user/edit/" class="btn btn-warning">Редактировать пользователя</a><br>
-							<a href="/admin/user/repass/" class="btn btn-danger">Сбросить пароль пользователю</a><br>
+							<a href="/admin/user/edit" class="btn btn-warning">Редактировать пользователя</a><br>
+							<a href="/admin/user/repass" class="btn btn-danger">Сбросить пароль пользователю</a><br>
 
 						</div>
 						<h4 class="text-center">Товары</h4>
 						<div>
 
 							<a href="/admin/product/add" class="btn btn-primary">Добавить товар</a><br>
-							<a href="/admin/product/edit/" class="btn btn-warning">Редактировать товар</a><br>
+							<a href="/admin/product/edit" class="btn btn-warning">Редактировать товар</a><br>
 
 						</div>
 						<h4 class="text-center">Категории</h4>
 						<div>
 
 							<a href="/admin/category/add" class="btn btn-primary">Добавить категорию</a><br>
-							<a href="/admin/category/edit/" class="btn btn-warning">Редактировать категорию</a><br>
+							<a href="/admin/category/edit" class="btn btn-warning">Редактировать категорию</a><br>
+
+						</div>
+						<h4 class="text-center">Подкатегории</h4>
+						<div>
+
+							<a href="/admin/subcategory/add" class="btn btn-primary">Добавить подкатегорию</a><br>
+							<a href="/admin/subcategory/edit" class="btn btn-warning">Редактировать подкатегорию</a><br>
 
 						</div>
 					</div>

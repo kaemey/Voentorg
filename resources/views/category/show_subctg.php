@@ -26,11 +26,19 @@
 									if (isset($products)){
 										echo "<div class='row'>";
 										for ($i = 0; $i < count($products); $i++){
+
+											if ($products[$i]['product_image'] != ""){
+												$image = $products[$i]['product_image'];
+											}
+											else {
+												$image = "images/default.jpg";
+											}
+											
 											if($i % 3 == 0) echo "</div><div class='row'>";
 											echo "
 											<div class='col-md-4 catalog_chapter'>
 												<a href='/product/".$products[$i]['category_id']."/".$products[$i]['subcategory_id']."/".$products[$i]['product_id']."'>
-													<img src='".$url.$products[$i]['product_image']."' alt='catalog_chapter'>
+													<img src='".$url.$image."' alt='catalog_chapter'>
 													<p>".$products[$i]['product_title']."</p>
 												</a>
 											</div>

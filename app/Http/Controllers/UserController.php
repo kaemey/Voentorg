@@ -62,7 +62,7 @@ class UserController extends Controller{
 
         if($error == null){
             $_SESSION['login'] = $_POST['login'];
-            $_SESSION['user_id'] = $conn->insert_id;
+            $_SESSION['user_id'] = $conn->lastInsertId();
         }
 
         $_SESSION['regerror'] = $error;

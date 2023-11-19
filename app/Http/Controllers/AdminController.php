@@ -54,13 +54,9 @@ class AdminController extends Controller
 
     public function category_store()
     {
-        $conn = DB::$conn;
+        DB::insert('categories',$_POST);
 
-        $sql = "INSERT INTO categories (category_title, image) VALUES (?,?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$_POST['title'], $_POST['image']]);
-
-        Route::redirect('/category/create');
+        Route::redirect('/admin/category/edit');
     }
 
     public function category_select(){
@@ -105,6 +101,39 @@ class AdminController extends Controller
     public function category_delete($category_id){
         DB::delete('categories', ['id' => $category_id]);
         Route::redirect("/admin/category/edit");
+    }
+
+    public function subcategory_create()
+    {
+        return View::view('admin.subcategory_create');
+    }
+
+    public function subcategory_store()
+    {
+        DB::insert('subcategories', $_POST);
+
+        Route::redirect('/admin/subcategory/edit');
+    }
+
+    public function subcategory_edit($subcategory_id)
+    {
+        $subcategory = DB::select('subcategories', ['*'], ['subcategory_id'=>$subcategory_id])[0];
+        return View::view('admin.subcategory_edit',compact('subcategory'));
+    }
+
+    public function subcategory_update($subcategory_id){
+        DB::update('subcategories', $_POST,['subcategory_id' => $subcategory_id]);
+        Route::redirect('/admin/subcategory/edit');
+    }
+
+    public function subcategory_delete($subcategory_id){
+        DB::delete('subcategories',['subcategory_id' => $subcategory_id]);
+        Route::redirect('/admin/subcategory/edit');
+    }
+
+    public function subcategory_select(){
+        $subcategories = DB::select('subcategories', ['*']);
+        return View::view('admin.subcategory_select', compact('subcategories'));
     }
 
     public function product_store()
