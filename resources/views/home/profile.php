@@ -66,7 +66,7 @@
 							Город<br>
 							<input type="text" name="city" style="width: 100%;" :disabled="profile_disabled_inputs" value="<?= $user['city'] ?>"><br>
 							Адрес<br>
-							<input type="text" name="adress" v-model="profile_adress" style="width: 100%;" :disabled="profile_disabled_inputs"
+							<input type="text" name="adress" style="width: 100%;" :disabled="profile_disabled_inputs"
 								value="<?= $user['adress'] ?>"><br>
 							Email<br>
 							<input type="text" name="email"  style="width: 80%;" :disabled="profile_disabled_inputs"

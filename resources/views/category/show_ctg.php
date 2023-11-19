@@ -8,7 +8,9 @@
 				
 					<div class="row">
 						<div class="col-md-12 line_full">
-							<?php if (isset($subcategories)) echo $subcategories[0]['category_title']; ?>
+
+							<?=$myCategory['category_title'] ?>
+							
 						</div>
 					</div>
 					
@@ -30,6 +32,22 @@
 												</div>
 										<?php } ?>
 									</div>
+								<?php } else { ?>
+									<?php if (isset($products)){ 
+										echo "<div class='row'>";
+										for ($i = 0; $i < count($products); $i++){
+											if($i % 3 == 0) echo "</div><div class='row'>";
+											echo "
+											<div class='col-md-4 catalog_chapter'>
+												<a href='/product/".$products[$i]['category_id']."/".$products[$i]['subcategory_id']."/".$products[$i]['product_id']."'>
+													<img src='".$url.$products[$i]['product_image']."' alt='catalog_chapter'>
+													<p>".$products[$i]['product_title']."</p>
+												</a>
+											</div>
+											";
+										}
+										echo "</div>";
+									} ?>
 								<?php } ?>
 								
 							</div>
@@ -69,10 +87,12 @@
 													</li>			
 													<?php if($ctg_id == $category['id']){ ?>	
 														<ul style="margin-top: 3%;">
-															<?php foreach ($subcategories as $subcat){ ?>
-																<li>
-																	<a href="/subcategory/<?=$category['id']?>/<?=$subcat['subcategory_id']?>"><?=$subcat['subcategory_title']?></a>
-																</li>	
+															<?php if(isset($subcategories)) { ?>
+																<?php foreach ($subcategories as $subcat){ ?>
+																	<li>
+																		<a href="/subcategory/<?=$category['id']?>/<?=$subcat['subcategory_id']?>"><?=$subcat['subcategory_title']?></a>
+																	</li>	
+																<?php } ?>	
 															<?php } ?>	
 														</ul>
 													<?php } ?>									

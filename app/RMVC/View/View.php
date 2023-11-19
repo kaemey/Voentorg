@@ -25,12 +25,7 @@ class View{
         $url = "http://localhost:8000/";
 
         //Для развертывания Каталог в шапке
-        $conn = DB::$conn;
-        $result = $conn->query("SELECT * FROM categories");
-        $categories = array();
-        while($row = $result->fetch(PDO::FETCH_ASSOC)){
-            $categories[] = $row;
-        }
+        $categories = DB::select('categories', ['*']);
 
         extract(self::$data);
 

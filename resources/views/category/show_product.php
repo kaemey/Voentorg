@@ -21,7 +21,11 @@
 				
 					<div class="row">
 						<div class="col-md-12 line_full">
-							<?php if (isset($subcategories)) echo $subcategories[0]['category_title']; ?>
+							<?php if (count($subcategories)>0) { ?>
+								<?=$subcategories[0]['category_title']?>				
+							<?php } else { ?>
+								<?=$product['category_title']?>
+							<?php } ?>
 						</div>
 					</div>
 					
@@ -29,7 +33,7 @@
 					
 						<div class="col-md-9">
 						
-							<div class="container-fluid">
+							<div class="container-fluid" style="min-height: 700px">
 								<div class='row product mt-1'>
 									<div class='col-md-12 col-sm-12 col-xl-3 text-center'>
 										<img src='<?=$url.$image?>'>

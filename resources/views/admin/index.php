@@ -73,14 +73,14 @@ UserController::checkAdmin();
 						<h4 class="text-center">Товары</h4>
 						<div>
 
-							<a href="/admin/product/" class="btn btn-primary">Добавить товар</a><br>
+							<a href="/admin/product/add" class="btn btn-primary">Добавить товар</a><br>
 							<a href="/admin/product/edit/" class="btn btn-warning">Редактировать товар</a><br>
 
 						</div>
 						<h4 class="text-center">Категории</h4>
 						<div>
 
-							<a href="/admin/category/" class="btn btn-primary">Добавить категорию</a><br>
+							<a href="/admin/category/add" class="btn btn-primary">Добавить категорию</a><br>
 							<a href="/admin/category/edit/" class="btn btn-warning">Редактировать категорию</a><br>
 
 						</div>
