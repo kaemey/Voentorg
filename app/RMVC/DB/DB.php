@@ -80,6 +80,61 @@ class DB {
         
         return true;
         
-    }   
+    }
+
+    public static function select(string $table, array $fields, array $where = array()): bool|array{
+        //Объединяем массив $fields в строку
+        $fields_string =  implode(', ', $fields);
+        $data = array();
+
+        //Проверяем WHERE
+        if(count($where) > 0){
+            //Делаем WHERE
+            $data = array_merge($data, $where);
+            $where_keys = array_keys($where);
+            $where_string = implode(' AND ', array_map(fn ($field) => "$field=:$field", $where_keys));
+            $sql = "SELECT $fields_string FROM ".$table." WHERE $where_string";
+        }
+        else {
+            $sql = "SELECT $fields_string FROM ".$table;
+        }
+
+        $stmt = self::$conn->prepare($sql);
+
+        try {
+            $stmt->execute($data);
+            return $stmt->fetchAll();
+        } catch (PDOException $error) {
+            echo $error."<br>";
+            return false;
+        }
+        
+    }
+
+    public static function delete(string $table, array $where): bool{
+
+         $data = array();
+ 
+         //Проверяем WHERE
+         if(count($where) > 0){
+             //Делаем WHERE
+             $where_keys = array_keys($where);
+             $where_string = implode(' AND ', array_map(fn ($field) => "$field=:$field", $where_keys));
+             $sql = "DELETE FROM ".$table." WHERE $where_string";
+         }
+         else {
+             return false;
+         }
+         
+         $stmt = self::$conn->prepare($sql);
+ 
+         try {
+             $stmt->execute($where);
+             return true;
+         } catch (PDOException $error) {
+             echo $error."<br>";
+             return false;
+         }       
+    }
 
 }

@@ -63,6 +63,50 @@ class AdminController extends Controller
         Route::redirect('/category/create');
     }
 
+    public function category_select(){
+        return View::view('admin.category_select');
+    }
+
+    public function category_edit($category_id){
+        $category = DB::select('categories',['*'],['id'=>$category_id])[0];
+        $allSubcategories = DB::select('subcategories',['*']);
+        $mySubcategories = DB::select('subcategories',['subcategory_id'],['category_id' => $category_id]);
+        $mySubcategoriesIds = array();
+        foreach($mySubcategories as $mySubcategory){
+            $mySubcategoriesIds[] = $mySubcategory['subcategory_id'];
+        }
+        return View::view('admin.category_edit', compact('category', 'allSubcategories', 'mySubcategoriesIds'));
+    }
+
+    public function category_update($category_id){
+        //Ищем подкатегории в этой категории, чтобы узнать, какие из них не выбраны.
+        $subcategories = DB::select('subcategories',['subcategory_id'],['category_id'=>$category_id]);
+        $ids = array();
+        foreach($subcategories as $subcategory){
+            $ids[] = $subcategory['subcategory_id'];
+        }
+        //Ищем подкатегории, что были удалены из тех, что были в категории, чтобы обнулить им категорию.
+        $subctgsForDeletingThisCatId = array_diff($ids, $_POST['subcategories']);
+        //Ищем подкатегории, что были добавлены в категорию, чтобы изменить им категорию.
+        $subctgsForAddingThisCatId = array_diff($_POST['subcategories'], $ids);
+
+        foreach($subctgsForDeletingThisCatId as $id){
+            DB::update('subcategories',['category_id' => 0], ['subcategory_id'=> $id]);
+        }
+
+        foreach($subctgsForAddingThisCatId as $id){
+            DB::update('subcategories',['category_id' => $category_id], ['subcategory_id'=> $id]);
+        }
+
+        DB::update('categories',['category_title' => $_POST['title']], ['id'=> $category_id]);
+        Route::redirect("/admin/category/edit");
+    }
+
+    public function category_delete($category_id){
+        DB::delete('categories', ['id' => $category_id]);
+        Route::redirect("/admin/category/edit");
+    }
+
     public function product_store()
     {
         $conn = DB::$conn;
@@ -71,7 +115,7 @@ class AdminController extends Controller
         $stmt = $conn->prepare($sql);
         $stmt->execute([$_POST['title'], $_POST['price'], $_POST['image'], $_POST['description'], $_POST['category_id'], $_POST['subcategory_id'], $_POST['colors']]);
 
-        Route::redirect('/product');
+        Route::redirect('/admin/product/edit');
     }
 
     public function product_create()
@@ -93,6 +137,12 @@ class AdminController extends Controller
         $product= $stmt->fetch();
 
         return View::view('admin.product_edit', compact('product'));
+    }
+
+    public function product_update($product_id){
+        DB::update('products',$_POST, ['product_id' => $product_id]);
+        
+        Route::redirect("/admin/product/edit");
     }
 
 }

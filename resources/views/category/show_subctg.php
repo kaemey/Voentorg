@@ -8,7 +8,11 @@
 				
 					<div class="row">
 						<div class="col-md-12 line_full">
-							<?php if (isset($products)) echo $products[0]['category_title']; ?>
+							<?php if (count($products) > 0) { ?>
+								<?=$products[0]['category_title']?>
+							<?php } else { ?>
+								В подкатегории нет товаров
+							<?php } ?>
 						</div>
 					</div>
 					

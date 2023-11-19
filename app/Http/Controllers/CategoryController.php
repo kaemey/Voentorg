@@ -20,9 +20,13 @@ class CategoryController extends Controller{
         $stmt= $conn->prepare($sql);
         $stmt->execute([$ctg_id]);
         $subcategories = $stmt->fetchAll();
+        $myCategory = DB::select('categories', ['*'], ['id' => $ctg_id])[0];
 
-        if (isset($subcategories)) return View::view('category.show_ctg', compact('subcategories', "ctg_id"));
-        else return View::view('category.show_ctg', compact("ctg_id"));
+        if (count($subcategories) > 0) return View::view('category.show_ctg', compact('subcategories', "ctg_id", "myCategory"));
+        else {
+            $products = DB::select('products', ['*'], ['category_id' => $ctg_id]);
+            return View::view('category.show_ctg', compact("ctg_id", "myCategory", "products"));
+        }
     }    
 
     public function show_subctg($ctg_id, $subctg_id){

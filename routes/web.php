@@ -17,12 +17,14 @@ Route::get('/subcategory/{ctg_id}/{subctg_id}', [CategoryController::class, 'sho
 Route::get('/product/{ctg_id}/{subctg_id}/{product_id}', [CategoryController::class, 'show_product']);
 
 //АДМИНКА
-Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/admin/category', [AdminController::class, 'category_create']);
-Route::get('/admin/category/edit/{category_id}', [CategoryController::class, 'category_edit']);
-Route::post('/admin/category', [CategoryController::class, 'category_store']);
-Route::post('/admin/category/edit/{category_id}', [CategoryController::class, 'category_update']);
-Route::get('/admin/product', [AdminController::class, 'product_create']);
+Route::get('/adminPanel', [AdminController::class, 'index']);
+Route::get('/admin/category/add', [AdminController::class, 'category_create']);
+Route::get('/admin/category/edit/{category_id}', [AdminController::class, 'category_edit']);
+Route::post('/admin/category', [AdminController::class, 'category_store']);
+Route::get('/admin/category/edit', [AdminController::class, 'category_select']);
+Route::post('/admin/category/edit/{category_id}', [AdminController::class, 'category_update']);
+Route::post('/admin/category/delete/{category_id}', [AdminController::class, 'category_delete']);
+Route::get('/admin/product/add', [AdminController::class, 'product_create']);
 Route::get('/admin/product/edit', [AdminController::class, 'product_select']);
 Route::get('/admin/product/edit/{product_id}', [AdminController::class, 'product_edit']);
 Route::post('/admin/product', [AdminController::class, 'product_store']);
