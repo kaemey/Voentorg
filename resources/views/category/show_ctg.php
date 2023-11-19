@@ -26,7 +26,7 @@
 											<?php if($i % 3 == 0) echo "</div><div class='row'>"; ?>
 												<div class="col-md-4 catalog_chapter">
 													<a href="/subcategory/<?=$subcategories[$i]['category_id']?>/<?=$subcategories[$i]['subcategory_id']?>">
-														<img src="<?=$url.$subcategories[$i]['subcategory_image']?>" alt="catalog_chapter">
+														<img src="<?=$url?><?=$subcategories[$i]['subcategory_image'] == "" ? "images/default.jpg" : $subcategories[$i]['subcategory_image']?>" alt="catalog_chapter">
 														<p><?=$subcategories[$i]['subcategory_title']?></p>
 													</a>
 												</div>
@@ -36,6 +36,14 @@
 									<?php if (isset($products)){ 
 										echo "<div class='row'>";
 										for ($i = 0; $i < count($products); $i++){
+
+											if ($products[$i]['product_image'] != ""){
+												$image = $products[$i]['product_image'];
+											}
+											else {
+												$image = "images/default.jpg";
+											}
+
 											if($i % 3 == 0) echo "</div><div class='row'>";
 											echo "
 											<div class='col-md-4 catalog_chapter'>

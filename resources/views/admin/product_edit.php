@@ -22,7 +22,7 @@
 					<div class="row">
 					
 						<div class="col-md-4" style="min-height: 700px;">
-                         <a href="/admin" class="btn btn-warning">Назад</a><br><br>
+                         <a href="/admin/product/edit" class="btn btn-warning">Назад</a><br><br>
                             <form action="/admin/product/edit/<?=$product['product_id']?>" method="POST" id="product_create">
                                 Заголовок<br>
                                 <input type="text" name="product_title" value="<?=$product['product_title']?>"><br>

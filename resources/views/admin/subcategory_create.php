@@ -25,11 +25,11 @@
 					
 						<div class="col-md-4" style="height: 700px;">
 							
-                            <form action="/admin/category" method="POST">
+                            <form action="/admin/subcategory" method="POST">
                                 Title<br>
-                                <input type="text" name="category_title"><br>
+                                <input type="text" name="subcategory_title"><br>
                                 Image<br>
-                                <input type="text" name="category_image"><br><br>
+                                <input type="text" name="subcategory_image"><br><br>
                                 <input type="submit" class="btn btn-primary" value="Создать">
                             </form><br>
 							

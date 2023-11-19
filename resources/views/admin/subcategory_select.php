@@ -25,9 +25,9 @@
 					
 						<div class="col-md-12" style="min-height: 700px">
 							<a href="/adminPanel" class="btn btn-warning">Назад</a><br><br>
-                            <?php foreach($categories as $category){ ?>
-								<h3><?=$category['category_title']?></h3>
-								<a class="btn btn-primary" href="/admin/category/edit/<?=$category['id']?>">Редактировать</a>
+                            <?php foreach($subcategories as $subcategory){ ?>
+								<h3><?=$subcategory['subcategory_title']?></h3>
+								<a class="btn btn-primary" href="/admin/subcategory/edit/<?=$subcategory['subcategory_id']?>">Редактировать</a>
                             <?php } ?>
 							
 						</div>
